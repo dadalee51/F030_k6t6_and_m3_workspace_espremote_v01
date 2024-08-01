@@ -67,6 +67,6 @@ void loop()
     // digitalWrite(PA8, 0);  // green on upright
     digitalWrite(PA11, 0xff); //
   }
-     digitalWrite(PB4, 0x0);  // red led on
+  // digitalWrite(PB4, 0x0);  // red led on
 #endif
 }
