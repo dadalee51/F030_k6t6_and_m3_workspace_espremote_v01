@@ -8,8 +8,8 @@
         {
             "name": "PlatformIO",
             "includePath": [
-                "/home/qq/Documents/PlatformIO/Projects/espRemote_v01/include",
-                "/home/qq/Documents/PlatformIO/Projects/espRemote_v01/src",
+                "/home/qq/Documents/PlatformIO/Projects/F030_k6t6_and_m3_workspace_espremote_v01/espRemote_v01/include",
+                "/home/qq/Documents/PlatformIO/Projects/F030_k6t6_and_m3_workspace_espremote_v01/espRemote_v01/src",
                 "/home/qq/.platformio/packages/framework-arduinoststm32/cores/arduino/avr",
                 "/home/qq/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32",
                 "/home/qq/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32/LL",
@@ -33,6 +33,7 @@
                 "/home/qq/.platformio/packages/framework-cmsis/CMSIS/DSP/PrivateInclude",
                 "/home/qq/.platformio/packages/framework-arduinoststm32/cores/arduino",
                 "/home/qq/.platformio/packages/framework-arduinoststm32/variants/STM32F0xx/F030K6T",
+                "/home/qq/Documents/PlatformIO/Projects/F030_k6t6_and_m3_workspace_espremote_v01/espRemote_v01/lib/SparkFun_LIS2DH12_Arduino_Library-master/src",
                 "/home/qq/.platformio/packages/framework-arduinoststm32/libraries/CMSIS_DSP/src",
                 "/home/qq/.platformio/packages/framework-arduinoststm32/libraries/EEPROM/src",
                 "/home/qq/.platformio/packages/framework-arduinoststm32/libraries/IWatchdog/src",
@@ -50,8 +51,8 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
-                    "/home/qq/Documents/PlatformIO/Projects/espRemote_v01/include",
-                    "/home/qq/Documents/PlatformIO/Projects/espRemote_v01/src",
+                    "/home/qq/Documents/PlatformIO/Projects/F030_k6t6_and_m3_workspace_espremote_v01/espRemote_v01/include",
+                    "/home/qq/Documents/PlatformIO/Projects/F030_k6t6_and_m3_workspace_espremote_v01/espRemote_v01/src",
                     "/home/qq/.platformio/packages/framework-arduinoststm32/cores/arduino/avr",
                     "/home/qq/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32",
                     "/home/qq/.platformio/packages/framework-arduinoststm32/cores/arduino/stm32/LL",
@@ -75,6 +76,7 @@
                     "/home/qq/.platformio/packages/framework-cmsis/CMSIS/DSP/PrivateInclude",
                     "/home/qq/.platformio/packages/framework-arduinoststm32/cores/arduino",
                     "/home/qq/.platformio/packages/framework-arduinoststm32/variants/STM32F0xx/F030K6T",
+                    "/home/qq/Documents/PlatformIO/Projects/F030_k6t6_and_m3_workspace_espremote_v01/espRemote_v01/lib/SparkFun_LIS2DH12_Arduino_Library-master/src",
                     "/home/qq/.platformio/packages/framework-arduinoststm32/libraries/CMSIS_DSP/src",
                     "/home/qq/.platformio/packages/framework-arduinoststm32/libraries/EEPROM/src",
                     "/home/qq/.platformio/packages/framework-arduinoststm32/libraries/IWatchdog/src",
