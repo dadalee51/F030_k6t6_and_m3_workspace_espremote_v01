@@ -51,7 +51,7 @@ void setup() {
   WiFi.softAP(apid, pswd);
   //IPAddress IP = WiFi.softAPIP();
   WiFi.begin("076519399", "076519399");
-  // delay(1000);
+
   ArduinoOTA.begin();
   pinMode(2, OUTPUT);
   server.on("/", handleRoot);
@@ -65,8 +65,9 @@ void loop() {
   server.handleClient(); //use this to enable airSerial
   ArduinoOTA.handle(); //required for ota.
   //read from slave stm32, 
-  // Wire.requestFrom(SLAVE_ADDR, 8);    // request x bytes from sensor
-  // FOR(i,8){
-  //   slaveData[i]=Wire.read();
-  // }
+  Wire.requestFrom(SLAVE_ADDR, 8);    // request x bytes from sensor
+  FOR(i,8){
+    slaveData[i]=Wire.read();
+  }
+  
 }
