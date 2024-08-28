@@ -1,12 +1,13 @@
 /**
  * First uploads please use legacy arduino IDE, then can use platforIO project
+ * with laptop on battery power is preferred to avoid over current on espm3.
  */
 #include <ArduinoOTA.h>
 #include <ESP8266WiFi.h>
 #include <Wire.h>
 #include <ESP8266WebServer.h>
 #include <StreamString.h>
-#define SLAVE_ADDR 0x08
+#define SLAVE_ADDR 0x0C
 #define FOR(I,N) for(int I=0;I<N;I++)
 const char*apid = "TIGO_R030_A01";
 const char*pswd = "12345678";
