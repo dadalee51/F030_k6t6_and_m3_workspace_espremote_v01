@@ -56,8 +56,7 @@ void setup()
   hs.println("setup done 2.");
   delay(100);
 #ifdef ACC_ON
-  if (!accel.begin())
-  {
+  if (!accel.begin()){
     digitalWrite(PB4, 0); // red
     delay(100);
     digitalWrite(PB4, 1); // red
@@ -97,13 +96,7 @@ void loop()
 #endif
 #ifdef ACC_ON
   z_acc = accel.getZ();
-  if (z_acc < 0)
-  {
-    digitalWrite(PB4, 0); // red on when flipped
-  }
-  else
-  {
-    digitalWrite(PB4, 1); // red off
-  }
-#endif
+  if (z_acc < 0) digitalWrite(PB4, 0); // red on when flipped
+  else digitalWrite(PB4, 1); // red off
+  #endif
 }
