@@ -21,11 +21,9 @@ bool rcvFlag = false;
 void sendData()
 {
   msgFlag = true;
-  // FOR(i, 4) FOR(j, 4) Wire.write(joystick[i] >> (8 * j) & 0xFF);
-  // FOR(i, 4) FOR(j, 4) Wire.write(pswtch[i] >> (8 * j) & 0xFF);
-  //Wire.write(12);
-  Wire2.write("12345678");
-  // Wire2.flush();
+  FOR(i, 4) FOR(j, 4) Wire2.write(joystick[i] >> (8 * j));
+  FOR(i, 4) FOR(j, 4) Wire2.write(pswtch[i] >> (8 * j));
+  //Wire2.write("12345678");
 }
 void receiveData(int num){
   rcvFlag = true;

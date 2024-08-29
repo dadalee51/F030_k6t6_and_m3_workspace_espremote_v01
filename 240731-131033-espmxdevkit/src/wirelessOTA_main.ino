@@ -69,34 +69,22 @@ void loop()
   server.handleClient(); // use this to enable airSerial
   ArduinoOTA.handle();   // required for ota.
   // read from slave stm32,
-  Wire.requestFrom(SLAVE_ADDR, 8); // request x bytes from sensor
-  delay(10);
-  FOR(i, 8)
-  slaveData[i] = Wire.read();
-
-  delay(10);
-
-  delay(10);
-  // FOR(i,8){
-  //   if (Wire.available() >= sizeof(int)) {
-  //     // digitalWrite(2,1);
-
-  //     tempInt=0;
-  //     FOR(j,4){
-  //       tempInt = tempInt | (Wire.read() <<  (8 * j));  // Read 4 bytes per integer
-  //       slaveData[j]=tempInt;
-  //     }
-
-  //     // digitalWrite(2,0);
-  //   }
-  // }
+  Wire.requestFrom(SLAVE_ADDR, 32); // request x bytes from sensor
+  FOR(i,8){
+    if (Wire.available() >= sizeof(int)) {
+      tempInt=0;
+      FOR(j,4){
+        tempInt = tempInt | (Wire.read() <<  (8 * j));  // Read 4 bytes per integer
+      }
+      slaveData[i]=tempInt;
+    }
+  }
   outputBuffer.clear();
   FOR(i, 8)
   outputBuffer.printf("%d  ", slaveData[i]);
 }
 
-void sendToSlave()
-{
+void sendToSlave(){
   Wire.beginTransmission(SLAVE_ADDR);
   Wire.write("ABC");
   Wire.endTransmission();
