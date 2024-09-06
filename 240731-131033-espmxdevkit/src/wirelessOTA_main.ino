@@ -6,6 +6,7 @@
 #include <Wire.h>
 #include <ESP8266WebServer.h>
 #include <StreamString.h>
+#include <espNow.h>
 #define SLAVE_ADDR 0x0C
 #define FOR(I, N) for (int I = 0; I < N; I++)
 uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
@@ -26,24 +27,31 @@ StreamString outputBuffer;
 char ipString[16];
 int slaveData[8];
 
-typedef struct struct_message
-{
-  int id; // must be unique for each sender board
-  int x;
-  int y;
+typedef struct struct_message {
+  char a[32];
+  int b;
+  float c;
+  String d;
+  bool e;
 } struct_message;
 
 // Create a struct_message called myData
 struct_message myData;
 
-// Create peer interface
-esp_now_peer_info_t peerInfo;
 
-// callback when data is sent
-void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status)
-{
-  Serial.print("\r\nLast Packet Send Status:\t");
-  Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
+unsigned long lastTime = 0;  
+unsigned long timerDelay = 2000;  // send readings timer
+
+
+// Callback when data is sent
+void OnDataSent(uint8_t *mac_addr, uint8_t sendStatus) {
+  Serial.print("Last Packet Send Status: ");
+  if (sendStatus == 0){
+    Serial.println("Delivery success");
+  }
+  else{
+    Serial.println("Delivery fail");
+  }
 }
 
 void handleRoot()
@@ -87,25 +95,17 @@ void setup()
   Serial.begin(115200);
 
   // Init ESP-NOW
-  if (esp_now_init() != ESP_OK)
-  {
+  if (esp_now_init() != 0) {
     Serial.println("Error initializing ESP-NOW");
     return;
   }
 
+  // Once ESPNow is successfully Init, we will register for Send CB to
+  // get the status of Trasnmitted packet
+  esp_now_set_self_role(ESP_NOW_ROLE_CONTROLLER);
   esp_now_register_send_cb(OnDataSent);
-
-  // Register peer
-  memcpy(peerInfo.peer_addr, broadcastAddress, 6);
-  peerInfo.channel = 0;
-  peerInfo.encrypt = false;
-
-  // Add peer
-  if (esp_now_add_peer(&peerInfo) != ESP_OK)
-  {
-    Serial.println("Failed to add peer");
-    return;
-  }
+   // Register peer
+  esp_now_add_peer(broadcastAddress, ESP_NOW_ROLE_SLAVE, 1, NULL, 0);
 }
 int tempInt = 0;
 void loop()
@@ -129,27 +129,22 @@ void loop()
   outputBuffer.clear();
   FOR(i, 8)
   outputBuffer.printf("%d  ", slaveData[i]);
-
-  if (last_millis - millis() > 1000)
-  { 
-    last_millis = millis();
+ 
+  if ((millis() - lastTime) > timerDelay) {
     // Set values to send
-    myData.id = 1;
-    myData.x = random(0, 50);
-    myData.y = random(0, 50);
+    strcpy(myData.a, "THIS IS A CHAR");
+    myData.b = random(1,20);
+    myData.c = 1.2;
+    myData.d = "Hello";
+    myData.e = false;
 
     // Send message via ESP-NOW
-    esp_err_t result = esp_now_send(broadcastAddress, (uint8_t *)&myData, sizeof(myData));
+    esp_now_send(broadcastAddress, (uint8_t *) &myData, sizeof(myData));
 
-    if (result == ESP_OK)
-    {
-      Serial.println("Sent with success");
-    }
-    else
-    {
-      Serial.println("Error sending the data");
-    }
+    lastTime = millis();
   }
+
+
 }
 
 void sendToSlave()
